@@ -1,0 +1,203 @@
+/* style */
+
+body {
+    font-family: Junction;
+    font-size: 12px;
+}
+
+p {
+    font-size: 30px;
+}
+
+.info {
+    padding-left: 15%;
+    padding-right: 15%;
+    font: 16px Junction;
+}
+
+@font-face {
+  font-family: Junction;
+  src: url(junction-master/source/Junction-regular.vfb)
+}
+
+.navigator {
+    font-size: 30px;
+    font-family: Junction;
+    padding-top: 2%;
+}
+
+.container {
+  font-family: Junction;
+}
+
+.Description {
+  font-family: Junction;
+  padding-left: 15%;
+}
+
+.Fixed {
+  position: fixed;
+  left: 75%;
+}
+
+
+text {
+    fill: black;
+    text-anchor: middle;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 140px;
+    height: 45px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: purple;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node--root {
+    fill: red;
+}
+
+.node--leaf {
+    fill: white;
+}
+
+.header {
+    font: 20px Junction;
+}
+
+.label {
+    font: 0.8rem Arial;
+    text-anchor: middle;
+    color: black;
+    font-weight: bold;
+}
+
+.label,
+.node--root,
+.node--leaf {
+    pointer-events: none;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+  background: #456990;
+  color: #fff;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}  /* INTRO SECTION
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.intro {
+  background: #F45B69;
+  padding: 100px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+
+  /* TIMELINE
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.timeline ul {
+  background: #456990;
+  /*padding: 50px 0;*/
+}
+
+.timeline ul li {
+  list-style-type: none;
+  position: relative;
+  width: 6px;
+  margin: 0 auto;
+  padding-top: 300px;
+  background: #fff;
+}
+
+.timeline ul li::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.timeline ul li div {
+  position: relative;
+  bottom: 0;
+  width: 40px;
+  padding: 15px; /* 15px */
+  /*background: #F45B69;*/
+}
+
+
+.timeline ul li div {
+  left: -89px;
+  top: 20px;
+}
+
+
+time {
+  display: block;
+  content: '';
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+
+.timeline ul li::after {
+  transition: background .5s ease-in-out;
+}
+
+.timeline ul li.in-view::after {
+  background: #F45B69;
+}
+
+.timeline ul li div {
+  transform: translate3d(-5px, 0, 0);
+}
+
+.timeline ul li.in-view div {
+  transform: none;
+  visibility: visible;
+  opacity: 1;
+}
+
+a {
+  color: orange;
+}
+
+.timeline {
+    position: absolute;
+    padding-top: 1%;
+    left: 15%;
+}
