@@ -11,14 +11,14 @@ var vizHeight = svgHeight - margin.top - margin.bottom;
 var vizWidth = svgWidth - margin.left - margin.right;
 
 // starting stats
-var curStat = "BPM";
+var curStat = "PTS";
 var margin = 100, diameter = 700;
 
 /*
     Define game changers
 */
 
-var gameChangers = [2015, 2014, 2013, 2012]
+var gameChangers = [2019, 2015, 2014, 2013, 2012]
 
 for (var i = 0; i < gameChangers.length; i++) {
   drawGameChanger(gameChangers[i]);
@@ -36,7 +36,11 @@ var node;
 
 function drawGameChanger(gameChangerID) {
   // load data from github
-  d3.json("https://raw.githubusercontent.com/mmenz/YUSAG/master/Basketball/ClusterVisual/flare" + gameChangerID + ".json", function (error, root) {
+  file = "https://raw.githubusercontent.com/mmenz/YUSAG/master/Basketball/ClusterVisual/flare" + gameChangerID + ".json"
+  if (gameChangerID === 2019) {
+      file = "2019.json"
+  }
+  d3.json(file, function (error, root) {
     if (error) throw error;
 
     var div = d3.select("body").append("div")
@@ -51,7 +55,7 @@ function drawGameChanger(gameChangerID) {
     var pack = d3.layout.pack()
         .padding(1)
         .size([diameter - margin, diameter - margin])
-        .value(function (d) { return d.stats[curStat]})
+        .value(function (d) { return d[curStat]}) // d.stats[curStat]
     
     var svg = d3.select(".wrapper" + gameChangerID)
         .append("g")
@@ -78,15 +82,16 @@ function drawGameChanger(gameChangerID) {
         .enter().append("svg:image")
         .attr("class", "image")
         .attr("id", "g" + gameChangerID)
-        .attr("xlink:href", function (d) { if (d.image) return "https://raw.githubusercontent.com/mmenz/YUSAG/master/Basketball/ClusterVisual/" + d.image; return; })
+        //.attr("xlink:href", function (d) { if (d.image) return "https://raw.githubusercontent.com/mmenz/YUSAG/master/Basketball/ClusterVisual/" + d.image; return; })
+        .attr("xlink:href", function (d) { if (d.Image) return d.Image; return; })
         .on("click", function (d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
         .on("mouseover", function (d) { // if you hover over the player
             // grab all nodes for this circle
             node = svg.selectAll("cirlce,text,image").selectAll("#g" + gameChangerID);
-            node.filter(function (e) { return e.team != d.team && !d.children && !e.children; })
+            node.filter(function (e) { return e.Tm != d.Tm && !d.children && !e.children; })
                 .style("opacity", 0.5);
-            if (d.team)
-                header.text(d.team);
+            if (d.Tm)
+                header.text(d.Tm);
             else
                 header.text("NBA")
             div.transition()
@@ -94,10 +99,10 @@ function drawGameChanger(gameChangerID) {
                 .style("opacity", .9);
             if (!d.children) {
                 var trueCurStat = curStat;
-                if (curStat == "BPM") {
-                    trueCurStat = "trueBPM";
+                if (curStat == "PTS") {
+                    trueCurStat = "PTS";
                 }
-                div.html(d.name + "<br\>" + curStat + " : " + Number(d.stats[trueCurStat]).toFixed(2) + "<br\>" + "Year(s) : " + d.stats["Year"]) //info about highlighted player
+                div.html(d.Player + "<br\>" + curStat + " : " + Number(d[trueCurStat]).toFixed(2) + "<br\>" + "Season(s) : " + d["Season"]) //info about highlighted player
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 18) + "px");
             }
