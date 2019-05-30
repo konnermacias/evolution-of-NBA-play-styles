@@ -18,7 +18,7 @@ var margin = 100, diameter = 700;
     Define game changers
 */
 
-var gameChangers = [2019, 2015, 2014, 2013, 2012]
+var gameChangers = [1982, 1996, 2016]
 
 for (var i = 0; i < gameChangers.length; i++) {
   drawGameChanger(gameChangers[i]);
@@ -36,11 +36,7 @@ var node;
 
 function drawGameChanger(gameChangerID) {
   // load data from github
-  file = "https://raw.githubusercontent.com/mmenz/YUSAG/master/Basketball/ClusterVisual/flare" + gameChangerID + ".json"
-  if (gameChangerID === 2019) {
-      file = "2019.json"
-  }
-  d3.json(file, function (error, root) {
+  d3.json(gameChangerID + ".json", function (error, root) {
     if (error) throw error;
 
     var div = d3.select("body").append("div")
